@@ -91,7 +91,7 @@ export async function getAllProducts(){
   }
 }
 
-export async function addUserEmailToProduct(productId:String,userEmail:String){
+export async function addUserEmailToProduct(productId:String,userEmail:string){
   try {
     const product = await Product.findById(productId);
 
@@ -106,7 +106,7 @@ export async function addUserEmailToProduct(productId:String,userEmail:String){
 
       const emailContent = await generateEmailBody(product,"WELCOME")
 
-      // await sendEmail(emailContent,[userEmail]);
+      await sendEmail(emailContent,[userEmail]);
     }
   } catch (error) {
     console.log(error)
