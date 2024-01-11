@@ -91,24 +91,24 @@ export async function getAllProducts(){
   }
 }
 
-export async function addUserEmailToProduct(productId:String,userEmail:string){
+export async function addUserEmailToProduct(productId: string, userEmail: string) {
   try {
     const product = await Product.findById(productId);
 
-    if(!product) return ;
+    if (!product) return;
 
-    const userExist = product.users.some((user:User)=>user.email === userEmail);
+    const userExist = product.users.some((user: User) => user.email === userEmail);
 
-    if(!userExist) {
-      product.users.push({email:userEmail});
+    if (!userExist) {
+      product.users.push({ email: userEmail });
 
       await product.save();
 
-      const emailContent = await generateEmailBody(product,"WELCOME")
+      const emailContent = await generateEmailBody(product, "WELCOME");
 
-      await sendEmail(emailContent,[userEmail]);
+      await sendEmail(emailContent, [userEmail]);
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
